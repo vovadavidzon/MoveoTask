@@ -6,7 +6,7 @@ export const getRequest = async (url) => {
   const data = await response.json();
 
   if (!data) {
-    return error;
+    return console.log("Failed to get request");
   }
 
   return data;
