@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-
-const codeBlocks = [
-  { id: 1, name: "Add Two Numbers" },
-  { id: 2, name: "Error handling" },
-  { id: 3, name: "Data fetching" },
-  { id: 4, name: "Component lifecycle" },
-];
+import { baseUrl, getRequest } from "../../utils/services";
 
 const LobbyPage = () => {
+  const [codes, setCodes] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCode = async () => {
+      const response = await getRequest(`${baseUrl}`);
+      setCodes(response);
+    };
+
+    getCode();
+  }, []);
 
   return (
     <div className="container">
       <h1>Choose code block</h1>
       <ul>
-        {codeBlocks.map((codeBlock) => (
+        {codes?.map((code) => (
           <li
-            key={codeBlock.id}
+            key={code._id}
             onClick={() => {
-              navigate(`codepage/${codeBlock.id}`);
+              navigate(`codepage/${code?._id}`, { state: { code } });
             }}
           >
-            {" "}
-            {codeBlock.name}
+            {code?.title}
           </li>
         ))}
       </ul>

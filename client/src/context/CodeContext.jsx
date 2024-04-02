@@ -1,5 +1,14 @@
 import { getRequest } from "../utils/services";
 import { baseUrl } from "../utils/services";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-useEffect(() => {}, []);
+const [code, setCode] = useState();
+
+useEffect(() => {
+  const getCode = async () => {
+    const response = await getRequest(`${baseUrl}/:codeBlockId`);
+    setCode(response);
+  };
+
+  getCode();
+}, []);
