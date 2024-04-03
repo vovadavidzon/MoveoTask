@@ -3,21 +3,28 @@ const { Server } = require("socket.io");
 const io = new Server({ cors: "http://localhost:5174" });
 
 let mentorExists = false;
+let mentors = {};
+let role;
 
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
 
-  let role = mentorExists ? "student" : "mentor";
-  console.log(io.sockets.sockets.size);
+  // console.log(io.sockets.sockets.size);
 
   socket.on("join_code", (data) => {
+    const mentorExists = mentors[data];
+
+    role = mentorExists ? "student" : "mentor";
+    if (mentorExists === undefined) {
+      mentors[data] = data;
+    }
+    console.log(mentors);
     socket.join(data);
 
-    socket.to(data).emit("role", { role });
+    socket.emit("role", { role });
   });
 
   socket.on("update_code", (obj) => {
-    console.log("its valuee", obj.data._id);
     socket.to(obj.data._id).emit("receive_update", obj.value);
   });
 
@@ -25,12 +32,15 @@ io.on("connection", (socket) => {
     mentorExists = true;
   }
 
-  socket.on("disconnect", () => {
-    if (role === "mentor") {
-      if (io.sockets.sockets.size === 0) {
-        mentorExists = false;
-      }
+  socket.on("beforeDisconnect", (obj) => {
+    if (io.sockets.adapter.rooms.get(obj._id).size === 1) {
+      delete mentors[obj._id];
     }
+
+    console.log("mentors", mentors);
+  });
+
+  socket.on("disconnect", () => {
     console.log("client disconnected");
   });
 });

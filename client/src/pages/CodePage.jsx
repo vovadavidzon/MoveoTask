@@ -18,6 +18,7 @@ const CodePage = () => {
     setSocket(newSocket);
     if (data?._id !== "") {
       newSocket.emit("join_code", data?._id);
+
       newSocket.on("role", ({ role }) => {
         setRole(role);
         console.log(role);
@@ -28,11 +29,12 @@ const CodePage = () => {
     });
 
     return () => {
-      console.log("enterrrrrrr");
-
+      console.log("DISCONNECT");
+      newSocket.emit("beforeDisconnect", data);
       newSocket.disconnect();
     };
-  }, []);
+  }, [data._id]);
+  console.log(role);
 
   const onEditorChange = (value, event) => {
     socket.emit("update_code", { value, data });
@@ -43,7 +45,7 @@ const CodePage = () => {
   return (
     <div>
       <Editor
-        height="100vh"
+        height="60vh"
         width="100%"
         theme="vs-dark"
         defaultLanguage="javascript"
