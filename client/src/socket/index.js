@@ -54,4 +54,3 @@ io.on("connection", (socket) => {
     console.log("client disconnected");
   });
 });
-io.listen("https://moveotask-1.onrender.com");

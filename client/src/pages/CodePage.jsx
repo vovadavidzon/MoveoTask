@@ -15,7 +15,7 @@ const CodePage = () => {
 
   //intial socket
   useEffect(() => {
-    const newSocket = io("https://moveotask-1.onrender.com"); //connect to socket server
+    const newSocket = io("https://moveotask-e3ib.onrender.com"); //connect to socket server
     setSocket(newSocket);
     if (data?._id !== "") {
       newSocket.emit("join_code", data?._id);
