@@ -10,6 +10,7 @@ const LobbyPage = () => {
   useEffect(() => {
     const getCode = async () => {
       const response = await getRequest(`${baseUrl}`);
+      console.log(response);
       setCodes(response);
     };
 

@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const codeBlockRoute = require("./Routes/codeBlockRoute");
 require("dotenv").config();
+const { Server } = require("socket.io");
 
 const app = express();
 
@@ -13,7 +14,68 @@ app.use(codeBlockRoute);
 const port = process.env.PORT || 5001;
 const uri = process.env.ATLAS_URI;
 
-app.listen(port, () => {
+const http = require("http");
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "https://codesharelive.netlify.app",
+    methods: ["GET", "POST"],
+  },
+});
+
+let mentorExists = false;
+let mentors = {};
+let role;
+
+io.on("connection", (socket) => {
+  console.log("new connection", socket.id);
+  // console.log(io.sockets.sockets.size);
+
+  socket.on("join_code", (data) => {
+    const mentorExists = mentors[data];
+
+    role = mentorExists ? "student" : "mentor";
+    if (mentorExists === undefined) {
+      mentors[data] = data;
+    }
+    console.log(mentors);
+    socket.join(data);
+
+    socket.emit("role", { role });
+  });
+
+  socket.on("update_code", (obj) => {
+    const studentCode = obj.value;
+    const roomId = obj.data._id;
+    const solution = obj.data.solution;
+
+    const singleLineText1 = studentCode.replace(/\s/g, "");
+    const singleLineText2 = solution.replace(/\s/g, "");
+
+    if (singleLineText1.trim() === singleLineText2.trim()) {
+      socket.to(roomId).emit("show_smiley_face");
+    }
+    socket.to(obj.data._id).emit("receive_update", obj.value);
+  });
+
+  if (mentorExists === false) {
+    mentorExists = true;
+  }
+
+  socket.on("beforeDisconnect", (obj) => {
+    if (io.sockets.adapter.rooms.get(obj._id)?.size === 1) {
+      delete mentors[obj._id];
+    }
+
+    console.log("mentors", mentors);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("client disconnected");
+  });
+});
+
+server.listen(port, () => {
   console.log("server listening on port " + port);
 });
 

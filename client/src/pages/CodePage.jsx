@@ -15,7 +15,7 @@ const CodePage = () => {
 
   //intial socket
   useEffect(() => {
-    const newSocket = io("https://moveotask-1.onrender.com"); //connect to socket server
+    const newSocket = io("https://moveotask-e3ib.onrender.com/");
     setSocket(newSocket);
     if (data?._id !== "") {
       newSocket.emit("join_code", data?._id);
@@ -47,24 +47,28 @@ const CodePage = () => {
   };
 
   return (
-    <div>
+    <>
       {smileyDisplayed && (
         <div className="popup">
-          {smileyDisplayed && <span className="big-smiley"> 😊</span>}
+          <img
+            src="https://m.media-amazon.com/images/I/616qtZVqJ1L._AC_SL1500_.jpg"
+            alt="Smiley"
+          />
         </div>
       )}
-
-      <Editor
-        height="100vh"
-        width="100%"
-        theme="vs-dark"
-        defaultLanguage="javascript"
-        //defaultValue={updatedCode}
-        onChange={onEditorChange} // activate on every change
-        options={{ readOnly: role === "mentor", fontSize: "25px" }}
-        value={updatedCode}
-      />
-    </div>
+      <div>
+        <Editor
+          height="100vh"
+          width="100%"
+          theme="vs-dark"
+          defaultLanguage="javascript"
+          //defaultValue={updatedCode}
+          onChange={onEditorChange} // activate on every change
+          options={{ readOnly: role === "mentor", fontSize: "25px" }}
+          value={updatedCode}
+        />
+      </div>
+    </>
   );
 };
 
