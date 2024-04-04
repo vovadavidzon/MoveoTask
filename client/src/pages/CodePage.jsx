@@ -47,24 +47,29 @@ const CodePage = () => {
   };
 
   return (
-    // <div>
-    //  {smileyDisplayed && (
-    //     <div className="popup">
-    //      {smileyDisplayed && <span className="big-smiley"> 😊</span>}
-    //     </div>
-    //   )}
-    <div>
-      <Editor
-        height="100vh"
-        width="100%"
-        theme="vs-dark"
-        defaultLanguage="javascript"
-        //defaultValue={updatedCode}
-        onChange={onEditorChange} // activate on every change
-        options={{ readOnly: role === "mentor", fontSize: "25px" }}
-        value={updatedCode}
-      />
-    </div>
+    <>
+      {smileyDisplayed && (
+        <div className="popup">
+          <img
+            className="big-smiley"
+            src="../assets/616qtZVqJ1L.jpg"
+            alt="Smiley"
+          />
+        </div>
+      )}
+      <div>
+        <Editor
+          height="100vh"
+          width="100%"
+          theme="vs-dark"
+          defaultLanguage="javascript"
+          //defaultValue={updatedCode}
+          onChange={onEditorChange} // activate on every change
+          options={{ readOnly: role === "mentor", fontSize: "25px" }}
+          value={updatedCode}
+        />
+      </div>
+    </>
   );
 };
 
