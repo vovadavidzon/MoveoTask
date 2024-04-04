@@ -10,4 +10,4 @@ const findAllCodeBlocks = async (req, res) => {
   }
 };
 
-module.exports = { findCodeBlock, findAllCodeBlocks };
+module.exports = { findAllCodeBlocks };
