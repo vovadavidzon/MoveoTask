@@ -1,5 +1,5 @@
 //export const baseUrl = "https://moveotask-e3ib.onrender.com"; //db
-export const baseUrl = "http://localhost:5001";
+export const baseUrl = "https://moveotask-e3ib.onrender.com/";
 export const getRequest = async (url) => {
   const response = await fetch(url);
 
