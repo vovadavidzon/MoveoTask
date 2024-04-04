@@ -6,7 +6,7 @@ const io = new Server({ cors: "https://codesharelive.netlify.app" }); //front
 let mentorExists = false;
 let mentors = {};
 let role;
-console.log("hii");
+
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
 
@@ -28,9 +28,10 @@ io.on("connection", (socket) => {
   socket.on("update_code", (obj) => {
     const studentCode = obj.value;
     const roomId = obj.data._id;
+    const solution = obj.data._solution;
 
     const singleLineText1 = studentCode.replace(/\s/g, "");
-    const singleLineText2 = obj.data.solution.replace(/\s/g, "");
+    const singleLineText2 = solution.replace(/\s/g, "");
 
     if (singleLineText1.trim() === singleLineText2.trim()) {
       socket.to(roomId).emit("show_smiley_face");
