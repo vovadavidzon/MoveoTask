@@ -6,7 +6,7 @@ const io = new Server({ cors: "https://codesharelive.netlify.app" }); //front
 let mentorExists = false;
 let mentors = {};
 let role;
-
+console.log("hii");
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
 
