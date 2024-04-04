@@ -35,7 +35,6 @@ const CodePage = () => {
     });
 
     return () => {
-      console.log("DISCONNECT");
       newSocket.emit("beforeDisconnect", data);
       newSocket.disconnect();
     };
