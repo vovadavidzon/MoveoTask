@@ -50,11 +50,7 @@ const CodePage = () => {
     <>
       {smileyDisplayed && (
         <div className="popup">
-          <img
-            className="big-smiley"
-            src="../assets/616qtZVqJ1L.jpg"
-            alt="Smiley"
-          />
+          <img src="../assets/616qtZVqJ1L.jpg" alt="Smiley" />
         </div>
       )}
       <div>
