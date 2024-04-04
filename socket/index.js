@@ -1,6 +1,6 @@
 const { Server } = require("socket.io");
 
-const io = new Server({ cors: "http://localhost:5174" });
+const io = new Server({ cors: "https://codesharelive.netlify.app" });
 
 let mentorExists = false;
 let mentors = {};
