@@ -49,11 +49,16 @@ a:hover {
   overflow-x: auto; /* Allow horizontal scrolling for long lines */
 }
 
+.popup {
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
 .popup img {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 10;
-  width: 300px;
-  height: 300px;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
 }
