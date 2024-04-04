@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { baseUrl, getRequest } from "../../utils/services";
 
 const LobbyPage = () => {
   const [codes, setCodes] = useState();
   const navigate = useNavigate();
+  const title = "Choose code block";
 
   useEffect(() => {
     const getCode = async () => {
@@ -17,7 +18,7 @@ const LobbyPage = () => {
 
   return (
     <div className="container">
-      <h1>Choose code block</h1>
+      <h1>{title}</h1>
       <ul>
         {codes?.map((code) => (
           <li
