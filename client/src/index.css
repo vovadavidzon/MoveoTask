@@ -61,8 +61,3 @@ a:hover {
   box-shadow: 0 104px 8px rgba(10, 10, 10, 0.1);
   z-index: 9999;
 }
-
-.big-smiley {
-  font-size: 300px;
-  color: #ffd700; /* Yellow */
-}
