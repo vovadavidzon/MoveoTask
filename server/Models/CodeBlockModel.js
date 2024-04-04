@@ -10,6 +10,10 @@ const codeBlockSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    solution: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
