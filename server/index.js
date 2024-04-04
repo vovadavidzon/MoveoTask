@@ -18,7 +18,7 @@ const http = require("http");
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://codesharelive.netlify.app/",
+    origin: "https://codesharelive.netlify.app",
     methods: ["GET", "POST"],
   },
 });
