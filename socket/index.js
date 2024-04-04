@@ -53,5 +53,3 @@ io.on("connection", (socket) => {
     console.log("client disconnected");
   });
 });
-
-io.listen(3000);
