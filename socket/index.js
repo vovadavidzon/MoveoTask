@@ -1,7 +1,7 @@
 const { Server } = require("socket.io");
 
-//const io = new Server({ cors: "https://codesharelive.netlify.app" }); //front
-const io = new Server({ cors: "http://localhost:5173" });
+const io = new Server({ cors: "https://codesharelive.netlify.app" }); //front
+//const io = new Server({ cors: "http://localhost:5173" });
 
 let mentorExists = false;
 let mentors = {};
@@ -54,4 +54,4 @@ io.on("connection", (socket) => {
     console.log("client disconnected");
   });
 });
-io.listen(3000);
+io.listen("https://moveotask-1.onrender.com");
