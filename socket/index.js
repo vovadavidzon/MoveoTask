@@ -25,6 +25,15 @@ io.on("connection", (socket) => {
   });
 
   socket.on("update_code", (obj) => {
+    const studentCode = obj.value;
+    const roomId = obj.data._id;
+
+    const singleLineText1 = studentCode.replace(/\s/g, "");
+    const singleLineText2 = obj.data.solution.replace(/\s/g, "");
+
+    if (singleLineText1.trim() === singleLineText2.trim()) {
+      socket.to(roomId).emit("show_smiley_face");
+    }
     socket.to(obj.data._id).emit("receive_update", obj.value);
   });
 
@@ -33,7 +42,7 @@ io.on("connection", (socket) => {
   }
 
   socket.on("beforeDisconnect", (obj) => {
-    if (io.sockets.adapter.rooms.get(obj._id).size === 1) {
+    if (io.sockets.adapter.rooms.get(obj._id)?.size === 1) {
       delete mentors[obj._id];
     }
 
