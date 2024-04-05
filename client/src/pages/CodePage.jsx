@@ -38,20 +38,27 @@ const CodePage = () => {
       newSocket.disconnect();
     };
   }, [role]);
-
+  let timeoutId;
   const onEditorChange = (value, event) => {
-    let timeoutId;
     setupdatedCode(value); // Update local state immediately
 
     // Clear the existing timeout
     clearTimeout(timeoutId);
 
     // Set a new timeout to emit the update after 500 milliseconds (adjustable)
-    timeoutId = setTimeout(() => {
+    const newTimeoutId = setTimeout(() => {
       socket.emit("update_code", { value, data });
       console.log(value);
     }, 500); // Adjust the delay as needed
+
+    setTimeoutId(newTimeoutId); // Update timeoutId state
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId); // Clear timeout when component unmounts
+    };
+  }, [timeoutId]);
 
   return (
     <>
