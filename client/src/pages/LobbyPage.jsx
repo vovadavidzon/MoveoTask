@@ -12,7 +12,7 @@ const LobbyPage = () => {
     const getCode = async () => {
       setLoading(true);
       const response = await getRequest(`${baseUrl}`);
-      console.log(response);
+
       setCodes(response);
 
       setLoading(false);

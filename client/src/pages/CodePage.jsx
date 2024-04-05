@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
 import "highlight.js/styles/default.css";
 import { io } from "socket.io-client";
 import Editor from "@monaco-editor/react";
@@ -41,9 +40,16 @@ const CodePage = () => {
   }, [role]);
 
   const onEditorChange = (value, event) => {
-    socket.emit("update_code", { value, data });
+    setupdatedCode(value); // Update local state immediately
 
-    console.log(value);
+    // Clear the existing timeout
+    clearTimeout(timeoutId);
+
+    // Set a new timeout to emit the update after 500 milliseconds (adjustable)
+    timeoutId = setTimeout(() => {
+      socket.emit("update_code", { value, data });
+      console.log(value);
+    }, 500); // Adjust the delay as needed
   };
 
   return (
