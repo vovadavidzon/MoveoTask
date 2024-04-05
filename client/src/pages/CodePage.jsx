@@ -21,7 +21,6 @@ const CodePage = () => {
 
       newSocket.on("role", ({ role }) => {
         setRole(role);
-        console.log(role);
       });
     }
 
@@ -41,8 +40,6 @@ const CodePage = () => {
 
   const onEditorChange = (value, event) => {
     socket.emit("update_code", { value, data });
-
-    console.log(value);
   };
 
   return (
