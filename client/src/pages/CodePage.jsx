@@ -11,7 +11,6 @@ const CodePage = () => {
   const [role, setRole] = useState(null);
   const [updatedCode, setupdatedCode] = useState(data?.code);
   const [smileyDisplayed, setSmileyDisplayed] = useState(false);
-  const [TimeoutId, setTimeoutId] = useState(null);
   // https://moveotask-e3ib.onrender.com/
   //intial socket
   useEffect(() => {
@@ -39,27 +38,12 @@ const CodePage = () => {
       newSocket.disconnect();
     };
   }, [role]);
-  let timeoutId;
+
   const onEditorChange = (value, event) => {
-    setupdatedCode(value); // Update local state immediately
+    socket.emit("update_code", { value, data });
 
-    // Clear the existing timeout
-    clearTimeout(timeoutId);
-
-    // Set a new timeout to emit the update after 500 milliseconds (adjustable)
-    const newTimeoutId = setTimeout(() => {
-      socket.emit("update_code", { value, data });
-      console.log(value);
-    }, 500); // Adjust the delay as needed
-
-    setTimeoutId(newTimeoutId); // Update timeoutId state
+    console.log(value);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeoutId); // Clear timeout when component unmounts
-    };
-  }, [timeoutId]);
 
   return (
     <>
