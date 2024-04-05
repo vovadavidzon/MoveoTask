@@ -45,10 +45,14 @@ io.on("connection", (socket) => {
     socket.emit("role", { role });
   });
 
-  socket.on("update_code", (obj) => {
-    const studentCode = obj.value;
-    const roomId = obj.data._id;
-    const solution = obj.data.solution;
+  socket.on("update_code", async (obj) => {
+    try {
+      const studentCode = await obj.value;
+      const roomId = obj.data._id;
+      const solution = obj.data.solution;
+    } catch {
+      console.log(" student error ");
+    }
 
     const singleLineText1 = studentCode.replace(/\s/g, "");
     const singleLineText2 = solution.replace(/\s/g, "");
