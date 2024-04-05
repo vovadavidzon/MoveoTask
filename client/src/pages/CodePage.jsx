@@ -40,6 +40,7 @@ const CodePage = () => {
   }, [role]);
 
   const onEditorChange = (value, event) => {
+    let timeoutId;
     setupdatedCode(value); // Update local state immediately
 
     // Clear the existing timeout
