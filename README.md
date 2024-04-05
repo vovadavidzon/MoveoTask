@@ -22,8 +22,9 @@
   - **Student View:**
       - Ability to edit the code block.
  - Real-time code changes displayed using Socket.io.
- - Syntax highlighting using Highlight.js (supports JavaScript code only).
- - A smiley pops up on the screen if the student has succeeded in the exercise
+ - Syntax Editor using Monaco (supports JavaScript code only).
+ - A smiley pops up on the screen if the student has succeeded in the exercise.
+   ## For the bonus: you have to write the necessary code section instead of a comment !
  ### `Pictures:`
 <img src="https://github.com/vovadavidzon/MoveoTask/assets/93316203/ff070423-e730-487a-ba72-7f8c8adc8715" width="300" height="150">
 <img src="https://github.com/vovadavidzon/MoveoTask/assets/93316203/86fbe8f3-0407-4305-9ac5-62d6e2c474d4" width="300" height="150">
