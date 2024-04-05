@@ -16,7 +16,7 @@ const uri = process.env.ATLAS_URI;
 
 const http = require("http");
 const server = http.createServer(app);
-//https://codesharelive.netlify.app
+
 const io = new Server(server, {
   cors: {
     origin: "https://codesharelive.netlify.app",
@@ -30,7 +30,6 @@ let role;
 
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
-  // console.log(io.sockets.sockets.size);
 
   socket.on("join_code", (data) => {
     const mentorExists = mentors[data];
@@ -39,20 +38,16 @@ io.on("connection", (socket) => {
     if (mentorExists === undefined) {
       mentors[data] = data;
     }
-    console.log(mentors);
+
     socket.join(data);
 
     socket.emit("role", { role });
   });
 
-  socket.on("update_code", async (obj) => {
-    try {
-      const studentCode = await obj.value;
-      const roomId = obj.data._id;
-      const solution = obj.data.solution;
-    } catch {
-      console.log(" student error ");
-    }
+  socket.on("update_code", (obj) => {
+    const studentCode = obj.value;
+    const roomId = obj.data._id;
+    const solution = obj.data.solution;
 
     const singleLineText1 = studentCode.replace(/\s/g, "");
     const singleLineText2 = solution.replace(/\s/g, "");
