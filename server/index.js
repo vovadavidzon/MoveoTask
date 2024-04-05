@@ -16,7 +16,7 @@ const uri = process.env.ATLAS_URI;
 
 const http = require("http");
 const server = http.createServer(app);
-//https://codesharelive.netlify.app
+
 const io = new Server(server, {
   cors: {
     origin: "https://codesharelive.netlify.app",
@@ -30,7 +30,6 @@ let role;
 
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
-  // console.log(io.sockets.sockets.size);
 
   socket.on("join_code", (data) => {
     const mentorExists = mentors[data];
@@ -39,7 +38,7 @@ io.on("connection", (socket) => {
     if (mentorExists === undefined) {
       mentors[data] = data;
     }
-    console.log(mentors);
+
     socket.join(data);
 
     socket.emit("role", { role });

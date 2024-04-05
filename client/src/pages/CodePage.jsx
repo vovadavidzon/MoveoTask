@@ -11,7 +11,7 @@ const CodePage = () => {
   const [role, setRole] = useState(null);
   const [updatedCode, setupdatedCode] = useState(data?.code);
   const [smileyDisplayed, setSmileyDisplayed] = useState(false);
-  // https://moveotask-e3ib.onrender.com/
+
   //intial socket
   useEffect(() => {
     const newSocket = io("https://moveotask-e3ib.onrender.com/");
@@ -61,7 +61,6 @@ const CodePage = () => {
           width="100%"
           theme="vs-dark"
           defaultLanguage="javascript"
-          //defaultValue={updatedCode}
           onChange={onEditorChange} // activate on every change
           options={{ readOnly: role === "mentor", fontSize: "25px" }}
           value={updatedCode}
