@@ -16,6 +16,7 @@ const uri = process.env.ATLAS_URI;
 
 const http = require("http");
 const server = http.createServer(app);
+//https://codesharelive.netlify.app
 const io = new Server(server, {
   cors: {
     origin: "https://codesharelive.netlify.app",
