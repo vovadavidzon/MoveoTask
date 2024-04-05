@@ -11,6 +11,7 @@ const CodePage = () => {
   const [role, setRole] = useState(null);
   const [updatedCode, setupdatedCode] = useState(data?.code);
   const [smileyDisplayed, setSmileyDisplayed] = useState(false);
+  const [TimeoutId, setTimeoutId] = useState(null);
   // https://moveotask-e3ib.onrender.com/
   //intial socket
   useEffect(() => {
